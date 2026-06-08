@@ -1,0 +1,60 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  test:
+    name: Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.9", "3.12"]
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: pip
+
+      - name: Install package
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install -e ".[dev]"
+
+      - name: Import and compile check
+        run: |
+          python -m compileall -q episode_selection scripts
+          python -c "import episode_selection; print(episode_selection.__name__)"
+
+      - name: Run tests
+        run: python -m pytest -q
+
+      - name: CLI help checks
+        run: |
+          python scripts/run_episode_selection_experiment.py --help
+          python scripts/analyze_episode_selection_results.py --help
+          episode-selection-experiment --help
+
+      - name: Smoke experiment
+        run: |
+          python scripts/run_episode_selection_experiment.py \
+            --config configs/episode_selection_bc.yaml \
+            --output-dir outputs/episode_selection_bc_smoke \
+            --smoke-test \
+            --overwrite
+
+      - name: Standalone analysis
+        run: |
+          python scripts/analyze_episode_selection_results.py \
+            --input-dir outputs/episode_selection_bc_smoke \
+            --output-dir outputs/episode_selection_bc_smoke/reanalysis \
+            --overwrite

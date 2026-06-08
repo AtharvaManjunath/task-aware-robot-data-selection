@@ -1,0 +1,46 @@
+[project]
+name = "task-aware-robot-data-selection"
+version = "0.1.0"
+description = "Semantic and quality-aware episode selection for data-efficient behavior cloning"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+  "numpy>=1.22",
+  "PyYAML>=6.0",
+]
+authors = [
+  {name = "Repository contributors"},
+]
+license = {file = "LICENSE"}
+keywords = ["behavior-cloning", "robotics", "data-selection", "machine-learning", "research-software"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Intended Audience :: Science/Research",
+  "License :: OSI Approved :: MIT License",
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+[project.optional-dependencies]
+plot = ["matplotlib>=3.6"]
+analysis = ["pandas>=1.5", "matplotlib>=3.6"]
+test = ["pytest>=7.0"]
+dev = ["pytest>=7.0", "matplotlib>=3.6"]
+
+[project.scripts]
+episode-selection-experiment = "episode_selection.runner:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["episode_selection*"]

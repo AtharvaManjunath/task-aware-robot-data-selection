@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this research software, please cite it. Repository owner: edit placeholder metadata before archival release."
+title: "Semantic and Quality-Aware Episode Selection for Data-Efficient Behavior Cloning"
+version: 0.1.0
+date-released: 2026-06-08
+authors:
+  - name: "Repository contributors"
+    affiliation: "TODO: add institution or organization"
+repository-code: "TODO: add GitHub repository URL"
+abstract: "Research software framework for evaluating semantic and quality-aware robot demonstration episode selection for data-efficient behavior cloning."
+license: MIT
+keywords:
+  - behavior cloning
+  - robotics
+  - data selection
+  - machine learning
+  - research software

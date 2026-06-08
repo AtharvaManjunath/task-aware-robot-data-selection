@@ -1,0 +1,28 @@
+__pycache__/
+.pytest_cache/
+.venv/
+outputs/
+*.pyc
+
+# Local experiment data and model artifacts
+data/
+datasets/
+checkpoints/
+models/
+wandb/
+mlruns/
+*.ckpt
+*.pt
+*.pth
+*.onnx
+
+# Metadata and cache artifacts
+.mypy_cache/
+.ruff_cache/
+*.tmp
+*.log
+
+# OS/editor files
+.DS_Store
+.idea/
+.vscode/
